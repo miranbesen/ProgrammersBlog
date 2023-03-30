@@ -3,15 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlog.Data", "ProgrammersBlog.Data\ProgrammersBlog.Data.csproj", "{EC7EB623-3A3B-4A30-9A86-2396D8D489AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammersBlog.Data", "ProgrammersBlog.Data\ProgrammersBlog.Data.csproj", "{EC7EB623-3A3B-4A30-9A86-2396D8D489AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlog.Entities", "ProgrammersBlog.Entities\ProgrammersBlog.Entities.csproj", "{D2C8CEAD-6732-4E9A-89E4-A2487D72F02B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammersBlog.Entities", "ProgrammersBlog.Entities\ProgrammersBlog.Entities.csproj", "{D2C8CEAD-6732-4E9A-89E4-A2487D72F02B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5045139-2E90-4158-8C63-3BB3F06239D7} = {B5045139-2E90-4158-8C63-3BB3F06239D7}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlog.Shared", "ProgrammersBlog.Shared\ProgrammersBlog.Shared.csproj", "{B5045139-2E90-4158-8C63-3BB3F06239D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammersBlog.Shared", "ProgrammersBlog.Shared\ProgrammersBlog.Shared.csproj", "{B5045139-2E90-4158-8C63-3BB3F06239D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlog.Services", "ProgrammersBlog.Services\ProgrammersBlog.Services.csproj", "{83DAA704-F2D0-44A1-B8F3-A4A5862B9F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammersBlog.Services", "ProgrammersBlog.Services\ProgrammersBlog.Services.csproj", "{83DAA704-F2D0-44A1-B8F3-A4A5862B9F45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlog.MVC", "ProgrammersBlog.MVC\ProgrammersBlog.MVC.csproj", "{8DE12D26-4A1E-45FC-A229-2BDA8E608873}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammersBlog.MVC", "ProgrammersBlog.MVC\ProgrammersBlog.MVC.csproj", "{8DE12D26-4A1E-45FC-A229-2BDA8E608873}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
