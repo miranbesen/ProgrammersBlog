@@ -39,6 +39,25 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(u => u.ModifiedDate).IsRequired();
             builder.Property(u => u.Note).HasMaxLength(500);
             builder.ToTable("Users");
+            builder.HasData(new User
+            {
+                Id = 1,
+                RoleId = 1,
+                FirstName = "Miran",
+                LastName = "Besen",
+                Username = "miranbesen",
+                Email = "miranbesen@hotmail.com",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Description = "İlk Admin kullanicisi",
+                Note = "Admin Kullanicisi",
+                PasswordHash = Encoding.ASCII.GetBytes("a178ffc4647fa79f5c53ba7fdb3246e0"), //md5 şifremizi byte olarak vermek için böyle yazdık. 
+                Picture= "https://www.kolaydata.com/wp-content/uploads/2017/01/Windows-Kullanici-adini-degistirme-kapak.jpg"
+            });
         }
     }
 }
