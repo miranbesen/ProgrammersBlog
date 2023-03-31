@@ -32,4 +32,4 @@ namespace ProgrammersBlog.Shared.Utilities.Results.Concrete
     }
 }
 
-//Örnek olarak mesela result sınıfını kullanırken : new Result(ResultStatus.Error,exception.message,exception) gibi kullanabiliriz.
+//Örnek olarak mesela result sınıfını kullanırken : new Result(ResultStatus.Error,exception.message,exception) gibi kullanabilir  iz.
