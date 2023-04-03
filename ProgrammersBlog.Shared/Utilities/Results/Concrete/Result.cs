@@ -25,9 +25,9 @@ namespace ProgrammersBlog.Shared.Utilities.Results.Concrete
             Exception = exception;
         }
 
-        //public ResultStatus ResultStatus { get;} //ResultStatus.Success //ResultStatus.Error Bu şekilde kullanıcaz. Sonuç başarılı veya değil şeklinde durumları birbirinden ayırıyor olacaz.
-        //public string Message { get;} //başarılı olup olmadığını dönüyoruz.
-        //public Exception Exception { get;} //Exception'ları tutabilmek için. 
+        public ResultStatus ResultStatus { get; } //ResultStatus.Success //ResultStatus.Error Bu şekilde kullanıcaz. Sonuç başarılı veya değil şeklinde durumları birbirinden ayırıyor olacaz.
+        public string Message { get; } //başarılı olup olmadığını dönüyoruz.
+        public Exception Exception { get; } //Exception'ları tutabilmek için. 
 
     }
 }
