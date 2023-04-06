@@ -10,19 +10,22 @@ namespace ProgrammersBlog.Shared.Utilities.Results.Concrete
 {
     public class DataResult<T> : IDataResult<T>
     {
-        public DataResult(T data, ResultStatus resultStatus)
+        public DataResult(ResultStatus resultStatus, T data)
         {
-            Data = data;
             ResultStatus = resultStatus;
+            Data = data;
         }
-
-        public DataResult(T data, ResultStatus resultStatus, string message) : this(data, resultStatus)
+        public DataResult(ResultStatus resultStatus, string message, T data)
         {
+            ResultStatus = resultStatus;
             Message = message;
+            Data = data;
         }
-
-        public DataResult(T data, ResultStatus resultStatus, string message, Exception exception) : this(data, resultStatus, message)
+        public DataResult(ResultStatus resultStatus, string message, T data, Exception exception)
         {
+            ResultStatus = resultStatus;
+            Message = message;
+            Data = data;
             Exception = exception;
         }
 
