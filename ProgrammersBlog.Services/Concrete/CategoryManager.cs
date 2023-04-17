@@ -84,7 +84,7 @@ namespace ProgrammersBlog.Services.Concrete
             return new DataResult<IList<Category>>(ResultStatus.Error, "Hic bir kategori bulunamadı.", null);
         }
 
-        public Task<IResult> HardDelete(int categoryId)
+        public async Task<IResult> HardDelete(int categoryId)
         {
             var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
             if (category != null)

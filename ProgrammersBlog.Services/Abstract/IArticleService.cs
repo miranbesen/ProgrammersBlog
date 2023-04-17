@@ -1,4 +1,6 @@
 ﻿using ProgrammersBlog.Entities.Concrete;
+using ProgrammersBlog.Entities.Dtos;
+using ProgrammersBlog.Shared.Utilities.Results.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProgrammersBlog.Services.Abstract
 {
-    public class IArticleService
+    public interface IArticleService
     {
         Task<IDataResult<ArticleDto>> Get(int articleId); //Asenkron yazdığımız için Task seklinde yazdık.
         Task<IDataResult<ArticleListDto>> GetAllByCategory(int categoryId); //birden fazla category'i liste şeklinde getir. 
