@@ -15,7 +15,6 @@ namespace ProgrammersBlog.Entities.Concrete
         public DateTime Date { get; set; }
         public int ViewsCount { get; set; }
         public int CommentCount { get; set; }
-
         public string SeoAuthor { get; set; } //Arama motorunda aramaları kolaylastırmak için anahtar kelime kullanılması gibi düşünülebilir.
         public string SeoDescription { get; set; } 
         public string SeoTags { get; set; }

@@ -37,12 +37,21 @@ namespace ProgrammersBlog.Services.Concrete
                 IsDeleted = false
             }).ContinueWith(t => _unitOfWork.SaveAsync()); //yeni bir task ile zincirleme devam et demek(continuewith). Bu şekilde daha hızlı gerçekleştiriyor.
             //await _unitOfWork.SaveAsync();
-            return new Result(ResultStatus.Success, $"{categoryAddDto.Name} adlı kategori başarıyla eklenmiştir."); //font-end tarafına çok hızlı dönüyoruz return'ü hatta veri tabanına kayıt yapmadan front-end'e sonucu dönüyoruz. Böylece aslında hızdan kazanıyoruz fakat takip zorlaşıyor.
+            return new Result(ResultStatus.Success, $"{categoryAddDto.Name} adli kategori basariyla eklenmistir."); //front-end tarafına çok hızlı dönüyoruz return'ü hatta veri tabanına kayıt yapmadan front-end'e sonucu dönüyoruz. Böylece aslında hızdan kazanıyoruz fakat takip zorlaşıyor.
         }
 
-        public Task<IResult> Delete(int categoryId)
+        public async Task<IResult> Delete(int categoryId, string modifiedByName)
         {
-            throw new NotImplementedException();
+            var category =await _unitOfWork.Categories.GetAsync(c=>c.Id== categoryId);
+            if (category != null) 
+            {
+                category.IsDeleted = true;
+                category.ModifiedByName= modifiedByName;
+                category.ModifiedDate= DateTime.Now;
+                await _unitOfWork.Categories.UpdateAsync(category).ContinueWith(t=>_unitOfWork.SaveAsync());
+                return new Result(ResultStatus.Success, $"{category.Name} adli kategori basariyla silinmistir.");
+            }
+            return new Result(ResultStatus.Error, "Hic bir kategori bulunamadı.");
         }
 
         public async Task<IDataResult<Category>> Get(int categoryId)
@@ -52,7 +61,7 @@ namespace ProgrammersBlog.Services.Concrete
             {
                 return new DataResult<Category>(ResultStatus.Success, category);
             }
-            return new DataResult<Category>(ResultStatus.Error, "Böyle bir kategori bulunamadı.", data: null);
+            return new DataResult<Category>(ResultStatus.Error, "Böyle bir kategori bulunamadi.", data: null);
         }
 
         public async Task<IDataResult<IList<Category>>> GetAll()
@@ -62,7 +71,7 @@ namespace ProgrammersBlog.Services.Concrete
             {
                 return new DataResult<IList<Category>>(ResultStatus.Success, categories);
             }
-            return new DataResult<IList<Category>>(ResultStatus.Error, "Hiç bir kategori bulunamadı.", null); //data'sı null,message'si..., şeklinde constructor'a parametreleri yolladık.
+            return new DataResult<IList<Category>>(ResultStatus.Error, "Hic bir kategori bulunamadı.", null); //data'sı null,message'si..., şeklinde constructor'a parametreleri yolladık.
         }
 
         public async Task<IDataResult<IList<Category>>> GetAllByNonDeleted() //silinmemişleri getiriyor.
@@ -72,15 +81,22 @@ namespace ProgrammersBlog.Services.Concrete
             {
                 return new DataResult<IList<Category>>(ResultStatus.Success, categories);
             }
-            return new DataResult<IList<Category>>(ResultStatus.Error, "Hiç bir kategori bulunamadı.", null);
+            return new DataResult<IList<Category>>(ResultStatus.Error, "Hic bir kategori bulunamadı.", null);
         }
 
         public Task<IResult> HardDelete(int categoryId)
         {
-            throw new NotImplementedException();
+            var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
+            if (category != null)
+            {
+                
+                await _unitOfWork.Categories.DeleteAsync(category).ContinueWith(t => _unitOfWork.SaveAsync());
+                return new Result(ResultStatus.Success, $"{category.Name} adli kategori basariyla veritabanindan silinmistir.");
+            }
+            return new Result(ResultStatus.Error, "Böyle bir kategori bulunamadi.");
         }
 
-        public async Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
+        public async Task<IResult> Update(CategoryUpdateDto categoryUpdateDto, string modifiedByName) //bu fonksiyonların içini automapper ile yazıyoruz normalde. Şuanlık bu şekilde yazıyoruz.
         {
             var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryUpdateDto.Id); //güncellemek istediğimiz category'i çektik.
             if (category != null)
@@ -92,8 +108,10 @@ namespace ProgrammersBlog.Services.Concrete
                 category.IsDeleted= categoryUpdateDto.IsDeleted;
                 category.ModifiedByName = modifiedByName;
                 category.ModifiedDate = DateTime.Now;
-                //burada kaldım. 3o'uncu video 10'uncu dakika.
+                await _unitOfWork.Categories.UpdateAsync(category).ContinueWith(t=>_unitOfWork.SaveAsync());
+                return new Result(ResultStatus.Success, $"{categoryUpdateDto.Name} adli kategori basariyla guncellenmistir."); //front-end tarafına çok hızlı dönüyoruz return'ü hatta veri tabanına kayıt yapmadan front-end'e sonucu dönüyoruz. Böylece aslında hızdan kazanıyoruz fakat takip zorlaşıyor.
             }
+            return new Result(ResultStatus.Error, "Böyle bir kategori bulunamadi.");
         }
     }
 }
