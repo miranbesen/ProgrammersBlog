@@ -13,10 +13,10 @@ namespace ProgrammersBlog.Entities.Concrete
         public string Content { get; set; }
         public string Thumbnail { get; set; }
         public DateTime Date { get; set; }
-        public int ViewsCount { get; set; }
-        public int CommentCount { get; set; }
+        public int ViewsCount { get; set; } =0;
+        public int CommentCount { get; set; } =0;
         public string SeoAuthor { get; set; } //Arama motorunda aramaları kolaylastırmak için anahtar kelime kullanılması gibi düşünülebilir.
-        public string SeoDescription { get; set; } 
+        public string SeoDescription { get; set; }  
         public string SeoTags { get; set; }
         public int CategoryId { get; set; } //Hangi kategoride olduğunu anlamak için
         public Category Category { get; set; } //navigation property (category için.)
