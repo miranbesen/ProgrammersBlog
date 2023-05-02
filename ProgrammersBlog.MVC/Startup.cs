@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +24,8 @@ namespace ProgrammersBlog.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); //mvc uygulamasi olarak caliscagini soyledik.
+            services.AddAutoMapper(typeof(Startup)); //Derleme esnasında AutoMapper'in burdaki siniflari taramasini sagliyor.
             services.LoadMyServices();
             //services.AddRazorPages();
         }
@@ -33,7 +35,8 @@ namespace ProgrammersBlog.MVC
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage(); 
+                app.UseStatusCodePages();  //hic bulunmayan bir sayfaya gitmek istersek, bize 404 not found uyarisi vericek.
             }
             else
             {
@@ -43,7 +46,7 @@ namespace ProgrammersBlog.MVC
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(); //static dosyalari kullanmamiz icin. Resimler, css, javascript dosyalar gibi kullanmak icin.
 
             app.UseRouting();
 
@@ -51,7 +54,12 @@ namespace ProgrammersBlog.MVC
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}"); //id? nullable id deniliyor. Admin area icin tanımladık. Admin girisinde yonlendirilecek yer. 
+                //endpoints.MapRazorPages();
+                endpoints.MapDefaultControllerRoute(); //home controller index kısmına gidicek acilicak. 
             });
         }
     }
